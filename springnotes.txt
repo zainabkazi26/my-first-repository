@@ -1,0 +1,109 @@
+SPRINGBOOT-->
+	when the request frm the frontend comes it hits the controller first which acts as a reseptionist(like web.xml in servlet).
+	CONTORLLER-->
+	its duty istoreceive requestfrom frontend and thus it helps in routing(basically you come here you go there).conrtoller contains methods  linked to the  	endpoints.
+	
+	SERVICE LAYER-->
+		thecontroller wilgive the request to process to the service layer. the service layer contains the business logic
+		
+	if there's a need for databasethen it will be passed to dao
+	
+	DAL(Data Access Layer)/Repository layer-->
+		it has the read and write access to the database
+		
+	Entity layer->
+		the blood that flows inthe applicationis objects/variables of the entityclass.
+	Application Layer-->
+	contains the main()
+
+The basic sb app have 5 packages-->	
+	controller
+	service
+	dal-->has built-in support for sql ex .save .delete 100s of readymade methods	(its an interface it only have empty methods)											entity-->whatever data is flowing to and from in the appliction will be in the entity package (objects/variables of pojo class)
+	application-->contains the main()
+			
+			
+endpoint-->mapping to a endpoint,endpoints are case sensitive
+@requestMapping
+Each frontend button will be mapped to an endpoint. Every endpoint will be mapped to a particular method. For processing the method it will give it to the service layer, if any database operation has to  be done it will give it to the repository layer 
+
+
+*HTTP METHODS-->
+These methods are used in controller class
+only get can hit plain browser, post,update,delete,put cannot hit it,thuswe need to use api testing tool(postman,apidog,swagger,etc)
+GET-->select											GETMAPPING
+POST-->save/insert (When trying to store a new entry)						POSTMAPPING  
+PUT-->update											UPDATEMAPPING
+DELETE-->delete											DELETEMAPPPING(andr)
+if dont know which to use, use request mapping it will work forall four of them			REQUESTMAPPING
+
+Whatever is follwed bye @ is called annotation.
+
+
+CREATING A SPRINGBOOT APPLICATION-->
+1.visit spring initializer website-> this will make the basic structure of application it will give a zip file, extraxct it at the workspace.
+select dependencies-->web, jpa,  mysql
+start creating all packages in src/main/java com.eng.anglo pe click karke 
+
+fir contoller package mai class banao
+
+The IoC container will have beans of all the classes which are mapped with @Component (cntrl+shift+o) it can be used for every class, but we can also use @Service for service package classes
+@Repository for repository package classes
+@RestController for controller package classes
+@Entity for entity package classes
+
+go to serviepackage create class
+go to repository and make an interface and exdends it to JpaRepository
+for each entity class create a separate repository<Teacher, Integer>
+								wrapper class of primary key ofteacher class
+
+
+base  url will be the server machine ip address--> or mtlb uskebd hi endpoints aaenge example
+the request will be received in this format-->http://localhost:8083/wadiacollege -->http://localhost:8083/wadiacollege/addTeacher -->http://localhost:8083/wadiacollege/deleteTeacher etc.
+so if we want to put a this string after port no then write @RequestMapping("/Stringofyourchoice") just above the class name (upr)
+
+src/main/resources mai jake application.properties wali class mai below info daldo
+
+server.port=8083
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/scsdbnew
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+
+adding parameters to method in controller class
+when taking input from user whatever given in double quotes(nameof parameter) same should be passed in the url
+use (@RequestParam("n1") int n1,@RequestParam("n2") int n2)
+http://localhost:8080/wadiacollege/additionnew?n1=110&n2=100
+					      url ends at ? and then the parameters are given & is the separator	
+
+error 400-->Bad request
+404-->page no found error
+500
+
+//Annotations
+The IoC container will have beans of all the classes which are mapped with @Component
+@Component common for all
+@Repository for repository package classes
+@RestController for controller packes
+@Service for service package classes
+so if we want to put a this string after port no then write @RequestMapping("/Stringofyourchoice") just above the class name 
+
+These annotations are used in controller class
+@GETMAPPING
+@POSTMAPPING
+@UPDATEMAPPING
+@DELETEMAPPPING			
+@REQUESTMAPPING
+
+@RequestParam-->for individual parameter
+@RequestBody-->for single json object
+@PathVarible-->for passing in url
+
+
+@GeneratedValue-->for autoincrementaition
+@Id-->forprimary key
+@Column-->if we want tochange name of column
+
+@Autowired
